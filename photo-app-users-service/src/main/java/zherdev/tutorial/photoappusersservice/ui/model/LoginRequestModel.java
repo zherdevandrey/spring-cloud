@@ -1,14 +1,12 @@
 package zherdev.tutorial.photoappusersservice.ui.model;
 
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoginRequestModel {
 
     private String email;
