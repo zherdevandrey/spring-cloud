@@ -1,8 +1,10 @@
 package zherdev.tutorial.photoappusersservice.shared;
 
 import lombok.*;
+import zherdev.tutorial.photoappusersservice.ui.model.AlbumsResponseModel;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,4 +19,5 @@ public class UserDTO implements Serializable {
     private String email;
     private String userId;
     private String encryptedPassword;
+    List<AlbumsResponseModel> albumList;
 }

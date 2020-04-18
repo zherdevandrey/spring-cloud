@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService {
 
         userDTO.setUserId(UUID.randomUUID().toString());
         userDTO.setEncryptedPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
+      //  userDTO.setEncryptedPassword(userDTO.getPassword());
 
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
@@ -48,6 +49,15 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException(new UsernameNotFoundException("user is not found"));
         }
 
+        return new ModelMapper().map(userEntity, UserDTO.class);
+    }
+
+    @Override
+    public UserDTO getByUserId(String userId) {
+        UserEntity userEntity = userRepository.findByUserId(userId);
+        if (userEntity == null){
+            throw new RuntimeException(new UsernameNotFoundException("user is not found"));
+        }
         return new ModelMapper().map(userEntity, UserDTO.class);
     }
 

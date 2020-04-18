@@ -34,12 +34,13 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         try {
             LoginRequestModel loginRequestModel = new ObjectMapper().readValue(request.getInputStream(), LoginRequestModel.class);
 
-            return getAuthenticationManager().authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            loginRequestModel.getEmail(),
-                            loginRequestModel.getPassword(),
-                            new ArrayList<>())
-            );
+
+            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+                    loginRequestModel.getEmail(),
+                    loginRequestModel.getPassword(),
+                    new ArrayList<>());
+
+            return getAuthenticationManager().authenticate(usernamePasswordAuthenticationToken);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

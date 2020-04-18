@@ -28,12 +28,15 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.headers().frameOptions().disable();
         http.authorizeRequests()
-                .antMatchers(environment.getProperty("api.h2console.url.path")).permitAll()
-                .antMatchers(HttpMethod.POST, environment.getProperty("api.registration.url.path")).permitAll()
-                .antMatchers(HttpMethod.POST, environment.getProperty("api.login.url.path")).permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .addFilter(new AuthorizationFilter(authenticationManager(), environment));
+
+                 .antMatchers("/**").permitAll();
+               //  .antMatchers("/actuator/**").permitAll();
+//                .antMatchers("/users-ws/h2-console/**").permitAll()
+//                .antMatchers(HttpMethod.POST, "/users-ws/users").permitAll()
+//                .antMatchers(HttpMethod.POST, "/users-ws/login").permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .addFilter(new AuthorizationFilter(authenticationManager(), environment));
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
